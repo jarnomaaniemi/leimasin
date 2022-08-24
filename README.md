@@ -1,0 +1,2 @@
+# leimasin
+Harjoitus, yksinkertainen leimasin
