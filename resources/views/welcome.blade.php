@@ -41,38 +41,46 @@
                 </div>
             @endif
 
-            <form action="/" method="post" class="grid gap-4">
+            @if ($errors->any())
+                <div class="p-2 mb-4 bg-red-200 rounded-md">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="/stamp" method="post" class="grid gap-4">
                 @csrf
 
-                <label class="block">
-                    <span class="text-gray-800">Unix-aika</span>
-                    <input class="mt-1 block w-full rounded-md border-gray-300" type="text" id="unix-time"
-                        name="unix-time" value="{{ $_SERVER['REQUEST_TIME'] }}" disabled>
+                <label for="message">
+                    <span class="text-gray-700 dark:text-gray-500">Message</span>
+                    <input class="mt-1 block w-full rounded-md border-gray-300" type="text" id="message"
+                        name="message">
                 </label>
+
 
                 <label for="remote-ip">
-                    <span class="text-gray-800">IP-osoite</span>
+                    <span class="text-gray-700 dark:text-gray-500">IP-osoite</span>
                     <input class="mt-1 block w-full rounded-md border-gray-300" type="text" id="remote-ip"
-                        name="remote-ip" value="{{ $_SERVER['REMOTE_ADDR'] }}" disabled>
+                        name="remote-ip" value="{{ $_SERVER['REMOTE_ADDR'] }}">
                 </label>
 
-                {{-- <label for="http-request">
-
-                    <span class="text-gray-800">{{ $_SERVER["REQUEST_METHOD"] }}</span>
-                    <input class="mt-1 block w-full rounded-md border-gray-300" type="text" id="http-request"
-                        name="http-request" value="{{ $_SERVER["REQUEST_URI"] }}" disabled>
-                </label> --}}
+                <label class="block">
+                    <span class="text-gray-700 dark:text-gray-500">Unix-aika</span>
+                    <input class="mt-1 block w-full rounded-md border-gray-300" type="text" id="unix-time"
+                        name="unix-time" value="{{ $_SERVER['REQUEST_TIME'] }}">
+                </label>
 
                 <label for="user-agent">
-
-                    <span class="text-gray-800">Käyttäjäagentti</span>
+                    <span class="text-gray-700 dark:text-gray-500">Käyttäjäagentti</span>
                     <input class="mt-1 block w-full rounded-md border-gray-300" type="text" id="user-agent"
-                        name="user-agent" value="{{ $_SERVER['HTTP_USER_AGENT'] }}" disabled>
+                        name="user-agent" value="{{  $agent->browser() }} {{ $agent->version($agent->browser()) }} {{  $agent->platform() }} {{ $agent->version($agent->platform()) }}">
                 </label>
 
                 <button type="submit"
                     class="mt-1 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">Leimaa</button>
-
             </form>
         </div>
     </div>

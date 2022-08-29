@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TimestampController;
 use Illuminate\Support\Facades\Route;
+use Jenssegers\Agent\Agent;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['agent' => new Agent]);
 });
 
-Route::post('/', function () {
-    return redirect('')->with('status', 'Leimaus onnistui!');
-});
+Route::post('/stamp', [TimestampController::class, 'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
