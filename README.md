@@ -1,9 +1,10 @@
-# leimasin
-Harjoitus, yksinkertainen leimasin
+# app
+Simple (time)stamper
 # stack
 debian
 nginx
 laravel
+mariadb
 vite
 tailwind
 alpine
