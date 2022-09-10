@@ -9,12 +9,13 @@ class TimestampController extends Controller
 {
     public function store(Request $request)
     {
-        $validated = request()->validate([
+        $validated = $request->validate([
             'message' => 'required|string',
-            'unix-time' => 'required|integer',
             'remote-ip' => 'required|ip',
             'user-agent' => 'required|string'
         ]);
+
+        $validated['unix-time'] = time();
 
         Timestamp::create($validated);
 
