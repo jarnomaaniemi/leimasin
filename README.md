@@ -1,5 +1,5 @@
 # app
-Simple (time)stamper
+Simple message stamp and random bible verse show
 # stack
 debian
 nginx
